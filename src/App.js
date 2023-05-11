@@ -37,12 +37,7 @@ function App() {
       <Route path='/shippers' element={<Shipper/>} />
       <Route path='/vendors' element={<Vendor/>} /> */}
 
-      hyello
-      
-      <div>
-        <p>Hello</p>
-      </div>
-
+     
       </Routes>      
     </div>
     </BrowserRouter>
