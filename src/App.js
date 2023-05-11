@@ -35,9 +35,7 @@ function App() {
       {/*<Route path='/Payments' element={<Payment/>} />
       <Route path='/products' element={<Product/>} />
       <Route path='/shippers' element={<Shipper/>} />
-      <Route path='/vendors' element={<Vendor/>} /> */}
-
-     
+      <Route path='/vendors' element={<Vendor/>} /> */}    
       </Routes>      
     </div>
     </BrowserRouter>
