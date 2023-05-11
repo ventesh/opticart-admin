@@ -35,7 +35,7 @@ export class Customer extends Component {
                 <table className="table table-stripped">
                     <thead>
                         <th>
-                             CustomerId
+                             customerID
                         </th>
                         <th>
                              customerFname
@@ -67,8 +67,8 @@ export class Customer extends Component {
                     </thead>
                    <tbody>
                         {cust.map(dep =>
-                            <tr key={dep.customerId}>
-                                <td>{dep.customerId}</td>
+                            <tr key={dep.customerID}>
+                                <td>{dep.customerID}</td>
                                 <td>{dep.address}</td>
                                 <td>{dep.city}</td>
                                 <td>{dep.customerFname}</td>

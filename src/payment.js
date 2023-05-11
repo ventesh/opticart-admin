@@ -2,22 +2,22 @@ import React, { Component } from "react";
 import { variables } from "./Variable.js";
 
 
-export class Orders extends Component {
+export class Payment extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            orders: []
+            payments: []
         }
 
     }
 
     refreshList(){
-        fetch(variables.API_URL+'OrdersTbls')
+        fetch(variables.API_URL+'PaymentTbls')
         .then(responce=>responce.json())
         .then(data=>{
-            this.setState({orders:data});
+            this.setState({payments:data});
         })
     }
 
@@ -27,7 +27,7 @@ export class Orders extends Component {
 
     render() {
         const {
-            orders
+            payments
         }=this.state;
 
         return (
@@ -35,40 +35,24 @@ export class Orders extends Component {
                 <table className="table table-stripped">
                     <thead>
                         <th>
-                            OrderId
+                            PaymentId
                         </th>
                         <th>
-                            ProductId
+                            PaymentType
                         </th>
                         <th>
-                            CustomerId
-                        </th>
-                        <th>
-                            Paymentid
-                        </th>
-                        <th>
-                            OrderDate
-                        </th>
-                        <th>
-                            Shipdate
-                        </th>
-                        <th>
-                            PaymentDate
+                            Allowed
                         </th>                        
                         <th>
-                             Operations
+                            Options
                         </th>
                     </thead>
                     <tbody>
-                        {orders.map(dep =>
-                            <tr key={dep.OrderId}>
-                                <td>{dep.OrderId}</td>
-                                <td>{dep.ProductId}</td>
-                                <td>{dep.CustomerId}</td>
-                                <td>{dep.Paymentid}</td>
-                                <td>{dep.OrderDate}</td>
-                                <td>{dep.Shipdate}</td>
-                                <td>{dep.PaymentDate}</td>                                
+                        {payments.map(dep =>
+                            <tr key={dep.PaymentId}>
+                                <td>{dep.PaymentId}</td>
+                                <td>{dep.PaymentType}</td>
+                                <td>{dep.Allowed}</td>                                
                                 <td>
                                     <button type="button"
                                         className="btn btn-light mr-1">

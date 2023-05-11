@@ -61,11 +61,15 @@ export class OrderDetails extends Component {
                         <th>
                              Color
                         </th>
+                        <th>
+                            Operations
+                        </th>
                     </thead>
                     <tbody>
                         {orderdetails.map(dep =>
                             <tr key={dep.OrderDetailId}>
                                 <td>{dep.OrderDetailId}</td>
+                                <td>{dep.OrderId}</td>
                                 <td>{dep.ProductId}</td>
                                 <td>{dep.Price}</td>
                                 <td>{dep.Quantity}</td>
