@@ -8,9 +8,9 @@ import { Feedback } from './feedback';
 import { OrderDetails } from './OrderDetails';
 import { Orders } from './Orders';
 import { Payment } from './payment';
-// import { Product } from './products';
-// import { Shipper } from './shippers';
-// import { Vendor } from './vendors';
+import { Product } from './products.js';
+import { Shipper } from './shippers';
+import { Vendor } from './vendors';
 import {BrowserRouter, Route, Routes,NavLink} from 'react-router-dom';
 
 
@@ -31,11 +31,10 @@ function App() {
       <Route path='/feedback' element={<Feedback/>} />
       <Route path='/OrderDetails' element={<OrderDetails/>} />
       <Route path='/Orders' element={<Orders/>} />
-      <Route path='/Payment' element={<Payment/>} />
-      {/*<Route path='/Payments' element={<Payment/>} />
+      <Route path='/Payment' element={<Payment/>}/>
       <Route path='/products' element={<Product/>} />
       <Route path='/shippers' element={<Shipper/>} />
-      <Route path='/vendors' element={<Vendor/>} /> */}    
+      <Route path='/vendors' element={<Vendor/>} />    
       </Routes>      
     </div>
     </BrowserRouter>
