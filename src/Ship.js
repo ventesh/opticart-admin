@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { variables } from "./Variable.js";
 
 
-export class shippers extends Component {
+export class Sh extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            shippers: []
+            shps: []
         }
 
     }
@@ -17,7 +17,7 @@ export class shippers extends Component {
         fetch(variables.API_URL+'ShipperTbls')
         .then(responce=>responce.json())
         .then(data=>{
-            this.setState({shippers:data});
+            this.setState({shps:data});
         })
     }
 
@@ -27,7 +27,7 @@ export class shippers extends Component {
 
     render() {
         const {
-            shippers
+            shps
         }=this.state;
 
         return (
@@ -42,13 +42,16 @@ export class shippers extends Component {
                         </th>
                         <th>
                             Contact
-                        </th>                        
+                        </th>        
+                        <th>
+                            Allowed    
+                        </th>                
                         <th>
                             Options
                         </th>
                     </thead>
                     <tbody>
-                        {shippers.map(dep =>
+                        {shps.map(dep =>
                             <tr key={dep.ShipperId}>
                                 <td>{dep.CompanyName}</td>
                                 <td>{dep.Contact}</td>

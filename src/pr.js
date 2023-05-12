@@ -2,22 +2,22 @@ import React, { Component } from "react";
 import { variables } from "./Variable.js";
 
 
-export class vendors extends Component {
+export class Product extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            vendors: []
+            prds: []
         }
 
     }
 
     refreshList(){
-        fetch(variables.API_URL+'VendorTbls')
+        fetch(variables.API_URL+'ProductsTbls')
         .then(responce=>responce.json())
         .then(data=>{
-            this.setState({vendors:data});
+            this.setState({prds:data});
         })
     }
 
@@ -27,7 +27,7 @@ export class vendors extends Component {
 
     render() {
         const {
-            vendors
+            prds
         }=this.state;
 
         return (
@@ -35,47 +35,56 @@ export class vendors extends Component {
                 <table className="table table-stripped">
                     <thead>
                         <th>
+                            ProductId
+                        </th>
+                        <th>
+                            ProductName
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
                             VendorId
                         </th>
                         <th>
-                            Name
+                            CategoryId
                         </th>
                         <th>
-                            email
-                        </th>  
+                            Quantity
+                        </th>
                         <th>
-                            CompanyName
-                        </th>  
+                            ProductPrice
+                        </th>
                         <th>
-                            Contact
-                        </th>  
+                            Size
+                        </th>
                         <th>
-                            City
-                        </th>  
+                            Color
+                        </th> 
                         <th>
-                            State
-                        </th>  
+                            InStockProductNumber
+                        </th> 
                         <th>
-                            pin
-                        </th>  
-                        <th>
-                            GoodsType
+                            Product_Image
                         </th>                        
                         <th>
                             Options
                         </th>
                     </thead>
                     <tbody>
-                        {vendors.map(dep =>
-                            <tr key={dep.VendorId}>
-                                <td>{dep.Name}</td>
-                                <td>{dep.email}</td>
-                                <td>{dep.CompanyName}</td>
-                                <td>{dep.Contact}</td>
-                                <td>{dep.City}</td>
-                                <td>{dep.State}</td>
-                                <td>{dep.pin}</td>
-                                <td>{dep.GoodsType}</td>                             
+                        {prds.map(dep =>
+                            <tr key={dep.ProductId}>
+                                <td>{dep.ProductId}</td>
+                                <td>{dep.ProductName}</td>
+                                <td>{dep.Description}</td>
+                                <td>{dep.VendorId}</td>
+                                <td>{dep.CategoryId}</td>
+                                <td>{dep.Quantity}</td>
+                                <td>{dep.ProductPrice}</td>
+                                <td>{dep.Size}</td>
+                                <td>{dep.Color}</td>
+                                <td>{dep.InStockProductNumber}</td>
+                                <td>{dep.Product_Image}</td>                             
                                 <td>
                                     <button type="button"
                                         className="btn btn-light mr-1">
