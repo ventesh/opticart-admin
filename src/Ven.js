@@ -32,8 +32,8 @@ export class Vendor extends Component {
 
         return (
             <div className="mt-5 d-flex justify-content-left">
-                <table className="table table-stripped">
-                    <thead>
+                <table className="table table-striped">
+                    <thead border="2">
                         <th>
                             VendorId
                         </th>
@@ -70,12 +70,12 @@ export class Vendor extends Component {
                             <tr key={dep.VendorId}>
                                 <td>{dep.VendorId}</td>
                                 <td>{dep.Name}</td>
-                                <td>{dep.email}</td>
+                                <td>{dep.Email}</td>
                                 <td>{dep.CompanyName}</td>
                                 <td>{dep.Contact}</td>
                                 <td>{dep.City}</td>
                                 <td>{dep.State}</td>
-                                <td>{dep.pin}</td>
+                                <td>{dep.Pin}</td>
                                 <td>{dep.GoodsType}</td>                             
                                 <td>
                                     <button type="button"

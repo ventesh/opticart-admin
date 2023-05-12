@@ -8,7 +8,7 @@ export class Customer extends Component {
         super(props);
 
         this.state = {
-            cust : []
+            cust : []           
         }
     }
 
@@ -17,7 +17,7 @@ export class Customer extends Component {
         .then(responce=>responce.json())
         .then(data=>{
             this.setState({cust:data});
-        })
+        })        
     }
 
     componentDidMount(){
@@ -32,7 +32,7 @@ export class Customer extends Component {
 
         return (
             <div className="mt-5 d-flex justify-content-left">
-                <table className="table table-stripped">
+                <table className="table table-striped">
                     <thead>
                         <th>
                              customerID
@@ -66,17 +66,17 @@ export class Customer extends Component {
                         </th>
                     </thead>
                    <tbody>
-                        {cust.map(dep =>
-                            <tr key={dep.customerID}>
-                                <td>{dep.customerID}</td>
-                                <td>{dep.address}</td>
-                                <td>{dep.city}</td>
-                                <td>{dep.customerFname}</td>
-                                <td>{dep.customerLname}</td>
-                                <td>{dep.email}</td>
-                                <td>{dep.password}</td>
-                                <td>{dep.pincode}</td>
-                                <td>{dep.state}</td>
+                        {cust.map(ab =>
+                            <tr key={ab.CustomerId}>
+                                <td>{ab.CustomerId}</td>
+                                <td>{ab.CustomerFname}</td>
+                                <td>{ab.CustomerLname}</td>
+                                <td>{ab.Email}</td>
+                                <td>{ab.Password}</td>
+                                <td>{ab.City}</td>
+                                <td>{ab.State}</td>
+                                <td>{ab.Address}</td>
+                                <td>{ab.Pincode}</td>                                
                                 <td>
                                     <button type="button"
                                         className="btn btn-light mr-1">

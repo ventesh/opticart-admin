@@ -32,7 +32,7 @@ export class Product extends Component {
 
         return (
             <div className="mt-5 d-flex justify-content-left">
-                <table className="table table-stripped">
+                <table className="table table-striped">
                     <thead>
                         <th>
                             ProductId

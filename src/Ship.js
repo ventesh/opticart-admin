@@ -32,7 +32,7 @@ export class Sh extends Component {
 
         return (
             <div className="mt-5 d-flex justify-content-left">
-                <table className="table table-stripped">
+                <table className="table table-striped">
                     <thead>
                         <th>
                             ShipperId
@@ -42,10 +42,7 @@ export class Sh extends Component {
                         </th>
                         <th>
                             Contact
-                        </th>        
-                        <th>
-                            Allowed    
-                        </th>                
+                        </th>                                               
                         <th>
                             Options
                         </th>
@@ -53,9 +50,9 @@ export class Sh extends Component {
                     <tbody>
                         {shps.map(dep =>
                             <tr key={dep.ShipperId}>
+                                <td>{dep.ShipperId}</td>
                                 <td>{dep.CompanyName}</td>
-                                <td>{dep.Contact}</td>
-                                <td>{dep.Allowed}</td>                                
+                                <td>{dep.Contact}</td>                                
                                 <td>
                                     <button type="button"
                                         className="btn btn-light mr-1">

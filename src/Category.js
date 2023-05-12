@@ -8,7 +8,7 @@ export class Category extends Component {
         super(props);
 
         this.state = {
-            categories: []
+            categories: []            
         }
 
     }
@@ -18,7 +18,7 @@ export class Category extends Component {
         .then(responce=>responce.json())
         .then(data=>{
             this.setState({categories:data});
-        })
+        })        
     }
 
     componentDidMount(){
@@ -27,12 +27,12 @@ export class Category extends Component {
 
     render() {
         const {
-            categories
+            categories,            
         }=this.state;
 
         return (
             <div className="mt-5 d-flex justify-content-left">
-                <table className="table table-stripped">
+                <table className="table table-striped">
                     <thead>
                         <th>
                             CategoryId
@@ -48,11 +48,11 @@ export class Category extends Component {
                         </th>
                         <th>
                             ActiveStatus
-                        </th>
+                        </th>                        
                         <th>
                             Options
                         </th>
-                    </thead>
+                    </thead>                    
                     <tbody>
                         {categories.map(dep =>
                             <tr key={dep.CategoryId}>
@@ -60,7 +60,7 @@ export class Category extends Component {
                                 <td>{dep.Categoryname}</td>
                                 <td>{dep.Description}</td>
                                 <td>{dep.Image}</td>
-                                <td>{dep.ActiveStatus}</td>
+                                <td>{dep.ActiveStatus}</td>                                
                                 <td>
                                     <button type="button"
                                         className="btn btn-light mr-1">
@@ -79,7 +79,7 @@ export class Category extends Component {
                             </tr>
                         )}
                     </tbody>
-                </table>
+                </table>                
             </div>
         )
     }
