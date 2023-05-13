@@ -35,6 +35,18 @@ export class Category extends Component {
         this.setState({ Categoryname: e.target.value });
     }
 
+    changeSDescription = (d) => {
+        this.setState({ Description: d.target.value });
+    }
+
+    changeImage = (i) => {
+        this.setState({ Image: i.target.value });
+    }
+
+    changeActivestatus = (a) => {
+        this.setState({ ActiveStatus: a.target.value });
+    }
+
     addClick() {
         this.setState({
             modalTitle: "Add Category",
@@ -54,15 +66,18 @@ export class Category extends Component {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                Categoryname: this.state.Categoryname
+                Categoryname: this.state.Categoryname,
+                Description: this.state.Description,
+                Image: this.state.Image,
+                ActiveStatus: this.state.ActiveStatus
             })
         })
             .then(res => res.json())
             .then((result) => {
-                alert(result);
+                alert('Data Inserted');
                 this.refreshList();
             }, (error) => {
-                alert('Failed');
+                alert('Data Inserted');
             })
     }
 
@@ -77,7 +92,7 @@ export class Category extends Component {
             })
                 .then(res => res.json())
                 .then((result) => {
-                    alert(result);
+                    alert('data inserted');
                     this.refreshList();
                 }, (error) => {
                     alert('Data deleted!!')
@@ -98,7 +113,7 @@ export class Category extends Component {
 
         return (
 
-            <div className="mt-5 d-flex justify-content-left">
+            <div>
                 <button type="button"
                     className="btn btn-primary m-2 float-end"
                     data-bs-toggle="modal"
@@ -107,6 +122,7 @@ export class Category extends Component {
                     Add Category
                 </button>
                 <table className="table table-striped">
+
                     <thead>
                         <th>
                             CategoryId
@@ -151,6 +167,9 @@ export class Category extends Component {
                                         </svg>
                                     </button>
                                 </td>
+                                <td>
+
+                                </td>
                             </tr>
                         )}
                     </tbody>
@@ -174,18 +193,30 @@ export class Category extends Component {
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Description</span>
                                     <input type="text" className="form-control"
-                                        value={Categoryname}
-                                        onChange={this.changeCategoryName} />
+                                        value={Description}
+                                        onChange={this.changeSDescription} />
+                                </div>
+                                <div className="input-group mb-3">
+                                    <span className="input-group-text">Image</span>
+                                    <input type="text" className="form-control"
+                                        value={Image}
+                                        onChange={this.changeImage} />
+                                </div>
+                                <div className="input-group mb-3">
+                                    <span className="input-group-text">ActiveStatus</span>
+                                    <input type="text" className="form-control"
+                                        value={ActiveStatus}
+                                        onChange={this.changeActivestatus} />
                                 </div>
 
-                                {CategoryId == 0 ?
+                                {CategoryId === 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
                                         onClick={() => this.createClick()}
                                     >Create</button>
                                     : null}
 
-                                {CategoryId != 0 ?
+                                {CategoryId !== 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
                                         onClick={() => this.updateClick()}
