@@ -283,7 +283,7 @@ export class Feedback extends Component {
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Product</span>
                                     <select className="form-control"
-                                        onChange={this.changeCustomerId}
+                                        onChange={this.changeProductId}
                                         value={CustomerId}>{Customer.map(ab=><option key={ab.CustomerId}>
                                                 {ab.Cu}
                                             </option>)}
