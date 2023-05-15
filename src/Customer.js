@@ -30,6 +30,7 @@ export class Customer extends Component {
             cust
         }=this.state;
 
+        
         return (
             <div className="mt-5 d-flex justify-content-left">
                 <table className="table table-striped">
