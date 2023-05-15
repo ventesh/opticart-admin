@@ -116,7 +116,7 @@ export class Customer extends Component {
                     alert('data inserted');
                     this.refreshList();
                 }, (error) => {
-                    alert('Data deleted!!')
+                    alert('Data Deleted!!')
                 })
         }
     }
