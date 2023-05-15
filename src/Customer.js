@@ -125,7 +125,7 @@ export class Customer extends Component {
     render() {
         
         const {
-            cust,
+            cust,            
             modalTitle,
             CustomerId,
             CustomerFname,
