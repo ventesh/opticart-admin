@@ -234,7 +234,7 @@ export class Feedback extends Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">FeedbackDate</span>
-                                    <input type="text" className="form-control"
+                                    <input type="date" className="form-control"
                                         value={FeedbackDate}
                                         onChange={this.changeFeedbackDate} />
                                 </div>
