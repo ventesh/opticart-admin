@@ -138,7 +138,7 @@ export class Customer extends Component {
             Pincode
         }=this.state;
 
-        
+
         return (
             <div>
                 <button type="button"
@@ -148,7 +148,7 @@ export class Customer extends Component {
                     onClick={() => this.addClick()}>
                     Add Customers
                 </button>
-                <table className="table table-striped">
+                <table className="table table-stripped">
                     <thead>
                         <th>
                              customerID
