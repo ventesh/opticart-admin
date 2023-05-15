@@ -144,8 +144,8 @@ export class Product extends Component {
     render() {
         const {
             prds,
-            modalTitle,
-            ProductId,
+            modalTitle, 
+            ProductId,           
             ProductName,
             Description,
             VendorId,
