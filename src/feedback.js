@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { variables } from "./Variable.js";
+import { Customer } from "./Customer.js";
 
 
 export class Feedback extends Component {
@@ -8,6 +9,9 @@ export class Feedback extends Component {
         super(props);
 
         this.state = {
+            Customer: [],
+            Catgory: [],
+            Product: [],
             feedbacks: [],
             modalTitle: "",
             FdId: 0,
@@ -31,6 +35,23 @@ export class Feedback extends Component {
             this.setState({feedbacks:data});
         })
         
+        fetch(variables.API_URL+'CustomerTbls')
+        .then(responce=>responce.json())
+        .then(data=>{
+            this.setState({feedbacks:data});
+        })
+
+        fetch(variables.API_URL+'CategoryTbls')
+        .then(responce=>responce.json())
+        .then(data=>{
+            this.setState({feedbacks:data});
+        })
+
+        fetch(variables.API_URL+'ProductTbls')
+        .then(responce=>responce.json())
+        .then(data=>{
+            this.setState({feedbacks:data});
+        })
     }
 
     componentDidMount(){
@@ -122,6 +143,9 @@ export class Feedback extends Component {
 
     render() {
         const {
+            Customer,
+            Catgory,
+            Product,
             feedbacks,
             modalTitle,
             FdId,
@@ -174,16 +198,16 @@ export class Feedback extends Component {
                         </th>
                     </thead>
                     <tbody>
-                        {feedbacks.map(dep =>
-                            <tr key={dep.FdId}>
-                                <td>{dep.FdId}</td>
-                                <td>{dep.FeedbackTitle}</td>
-                                <td>{dep.Description}</td>
-                                <td>{dep.Ratings}</td>
-                                <td>{dep.FeedbackDate}</td>
-                                <td>{dep.CustomerId}</td>
-                                <td>{dep.CatgoryId}</td>
-                                <td>{dep.ProductId}</td>
+                        {feedbacks.map(fd =>
+                            <tr key={fd.FdId}>
+                                <td>{fd.FdId}</td>
+                                <td>{fd.FeedbackTitle}</td>
+                                <td>{fd.Description}</td>
+                                <td>{fd.Ratings}</td>
+                                <td>{fd.FeedbackDate}</td>
+                                <td>{fd.CustomerId}</td>
+                                <td>{fd.CatgoryId}</td>
+                                <td>{fd.ProductId}</td>
                                 <td>
                                     <button type="button"
                                         className="btn btn-light mr-1">
@@ -194,7 +218,7 @@ export class Feedback extends Component {
                                     </button>
                                     <button type="button"
                                         className="btn btn-light mr-1"
-                                        onClick={() => this.deleteClick(dep.FdId)}>
+                                        onClick={() => this.deleteClick(fd.FdId)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                                         </svg>
@@ -240,21 +264,30 @@ export class Feedback extends Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Customer</span>
-                                    <input type="text" className="form-control"
-                                        value={CustomerId}
-                                        onChange={this.changeCustomerId} />
+                                    <select className="form-control"
+                                        onChange={this.changeCustomerId}
+                                        value={CustomerId}>{Customer.map(ab=><option key={ab.CustomerId}>
+                                                {ab.Cu}
+                                            </option>)}
+                                        </select>
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Catgory</span>
-                                    <input type="text" className="form-control"
-                                        value={CatgoryId}
-                                        onChange={this.changeCatgoryId} />
+                                    <select className="form-control"
+                                        onChange={this.changeProductId}
+                                        value={CatgoryId}>{Catgory.map(dep=><option key={dep.CatgoryId}>
+                                                {dep.Categoryname}
+                                            </option>)}
+                                        </select>
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Product</span>
-                                    <input type="text" className="form-control"
-                                        value={ProductId}
-                                        onChange={this.changeProductId} />
+                                    <select className="form-control"
+                                        onChange={this.changeProductId}
+                                        value={CustomerId}>{Customer.map(ab=><option key={ab.CustomerId}>
+                                                {ab.Cu}
+                                            </option>)}
+                                        </select>
                                 </div>
                             
                                 {FdId === 0 ?
