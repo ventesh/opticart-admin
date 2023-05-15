@@ -138,6 +138,7 @@ export class Customer extends Component {
             Pincode
         }=this.state;
 
+        
         return (
             <div>
                 <button type="button"
