@@ -89,7 +89,6 @@ export class Orders extends Component {
         });
     }
 
-    
     createClick() {
         fetch(variables.API_URL + 'OrdersTbls', {
             method: 'POST',
