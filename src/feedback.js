@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { variables } from "./Variable.js";
-import { Customer } from "./Customer.js";
+//import { Customer } from "./Customer.js";
 
 
 export class Feedback extends Component {
@@ -9,9 +9,9 @@ export class Feedback extends Component {
         super(props);
 
         this.state = {
-            Customer: [],
-            Catgory: [],
-            Product: [],
+            cust: [],
+            categories: [],
+            prds: [],
             feedbacks: [],
             modalTitle: "",
             FdId: 0,
@@ -38,19 +38,19 @@ export class Feedback extends Component {
         fetch(variables.API_URL+'CustomerTbls')
         .then(responce=>responce.json())
         .then(data=>{
-            this.setState({feedbacks:data});
+            this.setState({cust:data});
         })
 
         fetch(variables.API_URL+'CategoryTbls')
         .then(responce=>responce.json())
         .then(data=>{
-            this.setState({feedbacks:data});
+            this.setState({categories:data});
         })
 
         fetch(variables.API_URL+'ProductTbls')
         .then(responce=>responce.json())
         .then(data=>{
-            this.setState({feedbacks:data});
+            this.setState({prds:data});
         })
     }
 
@@ -94,6 +94,19 @@ export class Feedback extends Component {
         });
     }
 
+    editClick(fd){
+        this.setState({
+            modalTitle: "Edit FeedBack",
+            FdId: fd.FdId,
+            FeedbackTitle: fd.FeedbackTitle,
+            Description: fd.Description,
+            Ratings: fd.Ratings,
+            FeedbackDate: fd.FeedbackDate,
+            CustomerId: fd.CustomerId,
+            CatgoryId: fd.CatgoryId,
+            ProductId: fd.ProductId
+        });
+    }
 
     createClick() {
         fetch(variables.API_URL + 'FeedbackTbls', {
@@ -143,9 +156,9 @@ export class Feedback extends Component {
 
     render() {
         const {
-            Customer,
-            Catgory,
-            Product,
+            cust,
+            categories,
+            prds,
             feedbacks,
             modalTitle,
             FdId,
@@ -210,7 +223,10 @@ export class Feedback extends Component {
                                 <td>{fd.ProductId}</td>
                                 <td>
                                     <button type="button"
-                                        className="btn btn-light mr-1">
+                                        className="btn btn-light mr-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        onClick={() => this.editClick(fd)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-right" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
                                             <path fill-rule="evenodd" d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
@@ -264,28 +280,28 @@ export class Feedback extends Component {
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Customer</span>
-                                    <select className="form-control"
+                                    <select className="form-select"
                                         onChange={this.changeCustomerId}
-                                        value={CustomerId}>{Customer.map(ab=><option key={ab.CustomerId}>
-                                                {ab.Cu}
+                                        value={CustomerId}>{cust.map(ab=><option key={ab.CustomerId}>
+                                                {ab.CustomerFname}
                                             </option>)}
                                         </select>
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Catgory</span>
-                                    <select className="form-control"
-                                        onChange={this.changeProductId}
-                                        value={CatgoryId}>{Catgory.map(dep=><option key={dep.CatgoryId}>
+                                    <select className="form-select"
+                                        onChange={this.changeCatgoryId}
+                                        value={CatgoryId}>{categories.map(dep=><option key={dep.CatgoryId}>
                                                 {dep.Categoryname}
                                             </option>)}
                                         </select>
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Product</span>
-                                    <select className="form-control"
+                                    <select className="form-select"
                                         onChange={this.changeProductId}
-                                        value={CustomerId}>{Customer.map(ab=><option key={ab.CustomerId}>
-                                                {ab.Cu}
+                                        value={ProductId}>{prds.map(pr=><option key={pr.ProductId}>
+                                                {pr.ProductName}
                                             </option>)}
                                         </select>
                                 </div>

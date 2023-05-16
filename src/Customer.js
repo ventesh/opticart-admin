@@ -148,7 +148,7 @@ export class Customer extends Component {
                     onClick={() => this.addClick()}>
                     Add Customers
                 </button>
-                <table className="table table-stripped">
+                <table className="table table-striped">
                     <thead>
                         <th>
                              customerID
