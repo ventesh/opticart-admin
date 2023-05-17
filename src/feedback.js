@@ -166,7 +166,8 @@ export class Feedback extends Component {
                         </th>
                         <th>
                             CustomerId
-                        </th><th>
+                        </th>
+                        <th>
                             CatgoryId
                         </th>
                         <th>
