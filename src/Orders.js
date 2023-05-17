@@ -238,7 +238,7 @@ export class Orders extends Component {
                                 </div>
 
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Shipdate</span>
+                                    <span className="input-group-text">Customer</span>
                                     <select className="form-select"
                                         onChange={this.changeCustomerId}
                                         value={CustomerId}>{cust.map(ab=><option key={ab.CustomerId}>
@@ -259,7 +259,7 @@ export class Orders extends Component {
 
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">OrderDate</span>
-                                    <input type="date" className="form-control"
+                                    <input type="date" placeholder="YYYY-MM-DD" className="form-control"
                                         value={OrderDate}
                                         onChange={this.changeOrderDate} />
                                 </div>
@@ -279,7 +279,7 @@ export class Orders extends Component {
                                 </div>
                                 
                             
-                                {OrderId !== 0 ?
+                                {OrderId === 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
                                         onClick={() => this.createClick()}  

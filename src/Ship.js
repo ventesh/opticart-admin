@@ -63,7 +63,7 @@ export class Sh extends Component {
                 alert('Data Inserted');
                 this.refreshList();
             }, (error) => {
-                alert('Data Inserted');
+                alert('Data not Inserted');
             })
     }
 
@@ -163,7 +163,7 @@ export class Sh extends Component {
                                         onChange={this.changeCompanyName} />
                                 </div>
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Content</span>
+                                    <span className="input-group-text">Contact</span>
                                     <input type="text" className="form-control"
                                         value={Contact}
                                         onChange={this.changeContact} />

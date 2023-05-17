@@ -81,6 +81,42 @@ export class Category extends Component {
             })
     }
 
+    editClick(dep) {
+        this.setState({
+            modalTitle: "Edit Category",
+            CategoryId: dep.CategoryId,
+            Categoryname: dep.Categoryname,
+            Description: dep.Description,
+            Image: dep.Image,
+            ActiveStatus: dep.ActiveStatus
+        });
+    }
+
+    updateClick(id){
+        fetch(variables.API_URL+'CategoryTbls/'+id,{
+            method:'PUT',
+            headers:{
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                CategoryId: this.state.CategoryId,
+                Categoryname: this.state.Categoryname,
+                Description: this.state.Description,
+                Image:this.state.Image,
+                ActiveStatus: this.state.ActiveStatus                
+            })
+        })
+        .then(res=>res.json())
+        .then((result)=>{
+            alert(result);
+            this.refreshList();
+        },(error)=>{
+            alert("Data Updated!!");
+            this.refreshList();
+        })
+    }
+
     deleteClick(id) {
         if (window.confirm('Are you sure?')) {
             fetch(variables.API_URL + 'CategoryTbls/' + id, {
@@ -92,10 +128,10 @@ export class Category extends Component {
             })
                 .then(res => res.json())
                 .then((result) => {
-                    alert('data inserted');
+                    alert('data Deleted');
                     this.refreshList();
                 }, (error) => {
-                    alert('Data deleted!!')
+                    alert(error);
                 })
         }
     }
@@ -153,12 +189,15 @@ export class Category extends Component {
                                 <td>{dep.ActiveStatus}</td>
                                 <td>
                                     <button type="button"
-                                        className="btn btn-light mr-1">
+                                        className="btn btn-light mr-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        onClick={() => this.editClick(dep)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-right" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
                                             <path fill-rule="evenodd" d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
                                         </svg>
-                                    </button>
+                                    </button>&nbsp;
                                     <button type="button"
                                         className="btn btn-light mr-1"
                                         onClick={() => this.deleteClick(dep.CategoryId)}>
@@ -182,8 +221,8 @@ export class Category extends Component {
                                 <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"
                                 ></button>
                             </div>
-
-                            <div className="modal-body">
+                            
+                            <div className="modal-body">                                
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">CategoryName</span>
                                     <input type="text" className="form-control"
@@ -219,7 +258,7 @@ export class Category extends Component {
                                 {CategoryId !== 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
-                                        onClick={() => this.updateClick()}
+                                        onClick={() => this.updateClick(CategoryId)}
                                     >Update</button>
                                     : null}
 

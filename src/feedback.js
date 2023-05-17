@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { variables } from "./Variable.js";
-//import { Customer } from "./Customer.js";
 
 
 export class Feedback extends Component {
@@ -9,10 +8,7 @@ export class Feedback extends Component {
         super(props);
 
         this.state = {
-            cust: [],
-            categories: [],
-            prds: [],
-            feedbacks: [],
+            fdbks: [],
             modalTitle: "",
             FdId: 0,
             FeedbackTitle: "",
@@ -26,63 +22,49 @@ export class Feedback extends Component {
 
     }
 
-
-
-    refreshList(){
-        fetch(variables.API_URL+'FeedbackTbls')
-        .then(responce=>responce.json())
-        .then(data=>{
-            this.setState({feedbacks:data});
-        })
-        
-        fetch(variables.API_URL+'CustomerTbls')
-        .then(responce=>responce.json())
-        .then(data=>{
-            this.setState({cust:data});
-        })
-
-        fetch(variables.API_URL+'CategoryTbls')
-        .then(responce=>responce.json())
-        .then(data=>{
-            this.setState({categories:data});
-        })
-
-        fetch(variables.API_URL+'ProductTbls')
-        .then(responce=>responce.json())
-        .then(data=>{
-            this.setState({prds:data});
-        })
+    refreshList() {
+        fetch(variables.API_URL + 'FeedbackTbls')
+            .then(responce => responce.json())
+            .then(data => {
+                this.setState({ fdbks: data });
+            })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.refreshList();
     }
 
-    changeFeedbackTitle = (e) => {
-        this.setState({ FeedbackTitle: e.target.value });
+    changeFeedTitle = (t) => {
+        this.setState({ FeedbackTitle: t.target.value });
     }
-    changeDescription = (e) => {
-        this.setState({ Description: e.target.value });
+
+    changeDes = (d) => {
+        this.setState({ Description: d.target.value });
     }
-    changeRatings = (e) => {
-        this.setState({ Ratings: e.target.value });
+
+    changeRating = (r) => {
+        this.setState({ Ratings: r.target.value });
     }
-    changeFeedbackDate = (e) => {
-        this.setState({ FeedbackDate: e.target.value });
+
+    changeFeeddate = (dt) => {
+        this.setState({ FeedbackDate: dt.target.value });
     }
-    changeCustomerId = (e) => {
-        this.setState({ CustomerId: e.target.value });
+
+    changeCustomer = (cm) => {
+        this.setState({ CustomerId: cm.target.value });
     }
-    changeCatgoryId = (e) => {
-        this.setState({ CatgoryId: e.target.value });
+
+    changecategory = (ct) => {
+        this.setState({ CatgoryId: ct.target.value });
     }
-    changeProductId = (e) => {
-        this.setState({ ProductId: e.target.value });
+
+    changeproduct = (p) => {
+        this.setState({ ProductId: p.target.value });
     }
-    
-    addClick(){
+
+    addClick() {
         this.setState({
-            modalTitle: "Add FeedBacks",
+            modalTitle: "Add Feedback",
             FdId: 0,
             FeedbackTitle: "",
             Description: "",
@@ -91,20 +73,6 @@ export class Feedback extends Component {
             CustomerId: 0,
             CatgoryId: 0,
             ProductId: 0
-        });
-    }
-
-    editClick(fd){
-        this.setState({
-            modalTitle: "Edit FeedBack",
-            FdId: fd.FdId,
-            FeedbackTitle: fd.FeedbackTitle,
-            Description: fd.Description,
-            Ratings: fd.Ratings,
-            FeedbackDate: fd.FeedbackDate,
-            CustomerId: fd.CustomerId,
-            CatgoryId: fd.CatgoryId,
-            ProductId: fd.ProductId
         });
     }
 
@@ -127,10 +95,11 @@ export class Feedback extends Component {
         })
             .then(res => res.json())
             .then((result) => {
-                alert('Data Inserted');
+                alert("Date Inserted");
                 this.refreshList();
             }, (error) => {
-                alert('Data Inserted');
+                alert(error);
+                this.refreshList();
             })
     }
 
@@ -145,21 +114,17 @@ export class Feedback extends Component {
             })
                 .then(res => res.json())
                 .then((result) => {
-                    alert('data inserted');
+                    alert('data Deleted!');
                     this.refreshList();
                 }, (error) => {
-                    alert('Data deleted!!')
+                    alert(error)
                 })
         }
     }
-    
 
     render() {
         const {
-            cust,
-            categories,
-            prds,
-            feedbacks,
+            fdbks,
             modalTitle,
             FdId,
             FeedbackTitle,
@@ -169,18 +134,20 @@ export class Feedback extends Component {
             CustomerId,
             CatgoryId,
             ProductId
-        }=this.state;
+        } = this.state;
 
         return (
+
             <div>
                 <button type="button"
                     className="btn btn-primary m-2 float-end"
                     data-bs-toggle="modal"
                     data-bs-target="#exampleModal"
                     onClick={() => this.addClick()}>
-                    Add Feedbacks
+                    Add Feedback
                 </button>
-                <table className="table table-stripped">
+                <table className="table table-striped">
+
                     <thead>
                         <th>
                             FdId
@@ -199,8 +166,7 @@ export class Feedback extends Component {
                         </th>
                         <th>
                             CustomerId
-                        </th>
-                        <th>
+                        </th><th>
                             CatgoryId
                         </th>
                         <th>
@@ -211,7 +177,7 @@ export class Feedback extends Component {
                         </th>
                     </thead>
                     <tbody>
-                        {feedbacks.map(fd =>
+                        {fdbks.map(fd =>
                             <tr key={fd.FdId}>
                                 <td>{fd.FdId}</td>
                                 <td>{fd.FeedbackTitle}</td>
@@ -224,21 +190,14 @@ export class Feedback extends Component {
                                 <td>
                                     <button type="button"
                                         className="btn btn-light mr-1"
-                                        data-bs-toggle="modal"
-                                        data-bs-target="#exampleModal"
-                                        onClick={() => this.editClick(fd)}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-right" viewBox="0 0 16 16">
-                                            <path fill-rule="evenodd" d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
-                                            <path fill-rule="evenodd" d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
-                                        </svg>
-                                    </button>
-                                    <button type="button"
-                                        className="btn btn-light mr-1"
                                         onClick={() => this.deleteClick(fd.FdId)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
                                             <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5ZM11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H2.506a.58.58 0 0 0-.01 0H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1h-.995a.59.59 0 0 0-.01 0H11Zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5h9.916Zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47ZM8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5Z" />
                                         </svg>
                                     </button>
+                                </td>
+                                <td>
+
                                 </td>
                             </tr>
                         )}
@@ -258,68 +217,50 @@ export class Feedback extends Component {
                                     <span className="input-group-text">FeedbackTitle</span>
                                     <input type="text" className="form-control"
                                         value={FeedbackTitle}
-                                        onChange={this.changeFeedbackTitle} />
+                                        onChange={this.changeFeedTitle} />
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Description</span>
                                     <input type="text" className="form-control"
                                         value={Description}
-                                        onChange={this.changeDescription} />
+                                        onChange={this.changeDes} />
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Ratings</span>
-                                    <input type="text" className="form-control"
+                                    <input type="number" className="form-control"
                                         value={Ratings}
-                                        onChange={this.changeRatings} />
+                                        onChange={this.changeRating} />
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">FeedbackDate</span>
                                     <input type="date" className="form-control"
                                         value={FeedbackDate}
-                                        onChange={this.changeFeedbackDate} />
+                                        onChange={this.changeFeeddate} />
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Customer</span>
-                                    <select className="form-select"
-                                        onChange={this.changeCustomerId}
-                                        value={CustomerId}>{cust.map(ab=><option key={ab.CustomerId}>
-                                                {ab.CustomerFname}
-                                            </option>)}
-                                        </select>
+                                    <input type="number" className="form-control"
+                                        value={CustomerId}
+                                        onChange={this.changeCustomer} />
                                 </div>
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Catgory</span>
-                                    <select className="form-select"
-                                        onChange={this.changeCatgoryId}
-                                        value={CatgoryId}>{categories.map(dep=><option key={dep.CatgoryId}>
-                                                {dep.Categoryname}
-                                            </option>)}
-                                        </select>
+                                    <span className="input-group-text">Category</span>
+                                    <input type="number" className="form-control"
+                                        value={CatgoryId}
+                                        onChange={this.changecategory} />
                                 </div>
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">Product</span>
-                                    <select className="form-select"
-                                        onChange={this.changeProductId}
-                                        value={ProductId}>{prds.map(pr=><option key={pr.ProductId}>
-                                                {pr.ProductName}
-                                            </option>)}
-                                        </select>
+                                    <input type="number" className="form-control"
+                                        value={ProductId}
+                                        onChange={this.changeproduct} />
                                 </div>
-                            
                                 {FdId === 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
-                                        onClick={() => this.createClick()}  
+                                        onClick={() => this.createClick()}
                                     >Create</button>
                                     : null}
-
-                                {FdId !== 0 ?
-                                    <button type="button"
-                                        className="btn btn-primary float-start"
-                                        onClick={() => this.updateClick()}
-                                    >Update</button>
-                                    : null}
-
                             </div>
 
                         </div>
