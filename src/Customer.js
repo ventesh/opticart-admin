@@ -75,6 +75,21 @@ export class Customer extends Component {
         });
     }
 
+    editClick(ab){
+        this.setState({
+            modalTitle: "Add Customers",
+            CustomerId: ab.CustomerId,
+            CustomerFname: ab.CustomerFname,
+            CustomerLname: ab.CustomerLname,
+            Email: ab.Email,
+            Password: ab.Password,
+            City: ab.City,
+            State: ab.State,
+            Address: ab.Address,
+            Pincode: ab.Pincode
+        });
+    }
+
     createClick() {
         fetch(variables.API_URL + 'CustomerTbls', {
             method: 'POST',
@@ -100,6 +115,37 @@ export class Customer extends Component {
             }, (error) => {
                 alert('Data Inserted');
             })
+    }
+
+    updateClick(id) {
+        if (window.confirm('Are you sure?')) {
+            fetch(variables.API_URL + 'CustomerTbls/' + id, {
+                method: 'PUT',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    CustomerId: this.state.CustomerId,
+                    CustomerFname: this.state.CustomerFname,
+                    CustomerLname: this.state.CustomerLname,
+                    Email: this.state.Email,
+                    Password: this.state.Password,
+                    City: this.state.City,
+                    State: this.state.State,
+                    Address: this.state.Address,
+                    Pincode: this.state.Pincode
+                })
+            })
+            .then(res => res.json())
+            .then((result) => {
+                alert('Data Update');
+                this.refreshList();
+            }, (error) => {
+                alert('Data Updated');
+                this.refreshList();
+            })
+        }    
     }
 
     deleteClick(id) {
@@ -195,12 +241,15 @@ export class Customer extends Component {
                                 <td>{ab.Pincode}</td>                                
                                 <td>
                                     <button type="button"
-                                        className="btn btn-light mr-1">
+                                        className="btn btn-light mr-1"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"
+                                        onClick={()=>this.editClick(ab)}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-in-down-right" viewBox="0 0 16 16">
                                             <path fill-rule="evenodd" d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
                                             <path fill-rule="evenodd" d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
                                         </svg>
-                                    </button>
+                                    </button>&nbsp;
                                     <button type="button"
                                         className="btn btn-light mr-1"
                                         onClick={() => this.deleteClick(ab.CustomerId)}>
@@ -283,7 +332,7 @@ export class Customer extends Component {
                                 {CustomerId !== 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
-                                        onClick={() => this.updateClick()}
+                                        onClick={() => this.updateClick(CustomerId)}
                                     >Update</button>
                                     : null}
 

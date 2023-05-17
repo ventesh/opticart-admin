@@ -202,7 +202,7 @@ export class Orders extends Component {
                                             <path fill-rule="evenodd" d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
                                             <path fill-rule="evenodd" d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
                                         </svg>
-                                    </button>
+                                    </button>&nbsp;
                                     <button type="button"
                                         className="btn btn-light mr-1"
                                         onClick={() => this.deleteClick(ord.OrderId)}>
@@ -238,7 +238,7 @@ export class Orders extends Component {
                                 </div>
 
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Shipdate</span>
+                                    <span className="input-group-text">Customer</span>
                                     <select className="form-select"
                                         onChange={this.changeCustomerId}
                                         value={CustomerId}>{cust.map(ab=><option key={ab.CustomerId}>
@@ -247,7 +247,7 @@ export class Orders extends Component {
                                         </select>
                                 </div>
                                 <div className="input-group mb-3">
-                                    <span className="input-group-text">Paymentid</span>
+                                    <span className="input-group-text">Payment</span>
                                     <select className="form-select"
                                         onChange={this.changePaymentid}
                                         value={Paymentid}>{payments.map(dep=><option key={dep.Paymentid}>
@@ -279,7 +279,7 @@ export class Orders extends Component {
                                 </div>
                                 
                             
-                                {OrderId !== 0 ?
+                                {OrderId === 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
                                         onClick={() => this.createClick()}  
@@ -292,7 +292,7 @@ export class Orders extends Component {
                                         onClick={() => this.updateClick()}
                                     >Update</button>
                                     : null}
-
+                                
                             </div>
 
                         </div>

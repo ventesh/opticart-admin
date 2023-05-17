@@ -27,7 +27,7 @@ export class Feedback extends Component {
     }
 
 
-
+    
     refreshList(){
         fetch(variables.API_URL+'FeedbackTbls')
         .then(responce=>responce.json())
@@ -231,7 +231,7 @@ export class Feedback extends Component {
                                             <path fill-rule="evenodd" d="M6.364 2.5a.5.5 0 0 1 .5-.5H13.5A1.5 1.5 0 0 1 15 3.5v10a1.5 1.5 0 0 1-1.5 1.5h-10A1.5 1.5 0 0 1 2 13.5V6.864a.5.5 0 1 1 1 0V13.5a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5v-10a.5.5 0 0 0-.5-.5H6.864a.5.5 0 0 1-.5-.5z" />
                                             <path fill-rule="evenodd" d="M11 10.5a.5.5 0 0 1-.5.5h-5a.5.5 0 0 1 0-1h3.793L1.146 1.854a.5.5 0 1 1 .708-.708L10 9.293V5.5a.5.5 0 0 1 1 0v5z" />
                                         </svg>
-                                    </button>
+                                    </button>&nbsp;
                                     <button type="button"
                                         className="btn btn-light mr-1"
                                         onClick={() => this.deleteClick(fd.FdId)}>
@@ -275,6 +275,7 @@ export class Feedback extends Component {
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">FeedbackDate</span>
                                     <input type="date" className="form-control"
+                                        
                                         value={FeedbackDate}
                                         onChange={this.changeFeedbackDate} />
                                 </div>
@@ -309,15 +310,15 @@ export class Feedback extends Component {
                                 {FdId === 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
-                                        onClick={() => this.createClick()}  
-                                    >Create</button>
+                                        onClick={() => this.createClick()} >Create
+                                    </button>
                                     : null}
 
                                 {FdId !== 0 ?
                                     <button type="button"
                                         className="btn btn-primary float-start"
-                                        onClick={() => this.updateClick()}
-                                    >Update</button>
+                                        onClick={() => this.updateClick()}>Update
+                                    </button>
                                     : null}
 
                             </div>
