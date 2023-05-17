@@ -259,7 +259,7 @@ export class Orders extends Component {
 
                                 <div className="input-group mb-3">
                                     <span className="input-group-text">OrderDate</span>
-                                    <input type="date" className="form-control"
+                                    <input type="date" placeholder="YYYY-MM-DD" className="form-control"
                                         value={OrderDate}
                                         onChange={this.changeOrderDate} />
                                 </div>
